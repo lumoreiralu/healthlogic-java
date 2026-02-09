@@ -3,28 +3,30 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Paciente  Lucia = new Paciente("Lucia Moreira", 1.53, 1.58, 29, "femenino", 39279226);
-        Paciente Fernando = new Paciente("Fernando", 82, 1.70, 34, "masculino", 123456);
+        Paciente  lucia = new Paciente("Lucia Moreira", 29, "femenino", 39279226);
+        Paciente fernando = new Paciente("Fernando", 34, "masculino", 123456);
 
-        CalculadorSalud calc = new CalculadorSalud();
+        CalculadorIMC calc = new CalculadorIMC();
 
+        lucia.addMedida(58.5, 1.58); // Primera vez
+        lucia.addMedida(63.4, 1.58);
 
-        List<Paciente> listaPacientes = new ArrayList<>();
-        listaPacientes.add(Fernando);
-        listaPacientes.add(Lucia);
+        fernando.addMedida(85.3, 1.70); //Primera vez
+        fernando.addMedida(80.2, 1.70);
 
         System.out.println("--- Reporte de Salud de Pacientes ---");
-        
-        for (Paciente p : listaPacientes) {
-            
-            double imcResultado = calc.calcularIMC(p.getPeso(), p.getAltura());
-            String categoria = calc.obtenerCategoriaIMC(imcResultado);
+        List<Paciente> pacientes = new ArrayList<>();
+        pacientes.add(fernando);
+        pacientes.add(lucia);
 
-            
-            System.out.println(p.getNombre() + ":");
-            System.out.println(" > IMC: " + String.format("%.2f", imcResultado));
-            System.out.println(" > Categoría: " + categoria);
-            System.out.println("-----------------------------------");
+        for (Paciente p : pacientes) {
+            System.out.println(p.getNombre());
+            for (Medida m : p.getMedidas()) {
+                double imc = calc.calcularIMC(m.getPeso(), m.getAltura());
+                System.out.println("Fecha: " + m.getFechaMedicion() + 
+                                   " | Peso: " + m.getPeso() + 
+                                   " | IMC: " + String.format("%.2f", imc));
+            }
         }
     }
     

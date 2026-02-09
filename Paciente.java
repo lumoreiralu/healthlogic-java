@@ -1,19 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Paciente{
     private String nombre;
     private int dni;
-    private double peso;
-    private double altura;
     private int edad;
     private String sexo;
+    private ArrayList<Medida> medidas;
 
     
-    public Paciente(String nombre, double peso, double altura, int edad, String sexo, int dni) {
+    public Paciente(String nombre, int edad, String sexo, int dni) {
         this.nombre = nombre;
-        this.peso = peso;
-        this.altura = altura;
         this.edad = edad;
         this.sexo = sexo;
         this.dni = dni;
+        this.medidas = new ArrayList<>();
+    }
+
+    public void addMedida(double peso, double altura) {
+        this.medidas.add(new Medida(peso, altura));
+    }
+
+    public List<Medida> getMedidas() {
+        ArrayList<Medida> copia = new ArrayList<>(medidas);
+        return copia;
+    }
+    
+    public Medida getUltimaMedida() {
+        if (medidas.isEmpty()) return null;
+        return medidas.get(medidas.size() - 1);
     }
 
     public String getNombre() {
@@ -22,18 +37,7 @@ public class Paciente{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public double getPeso() {
-        return peso;
-    }
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-    public double getAltura() {
-        return altura;
-    }
-    public void setAltura(double altura) {
-        this.altura = altura;
-    }
+
     public int getEdad() {
         return edad;
     }
@@ -49,8 +53,7 @@ public class Paciente{
     
     @Override
     public String toString(){
-        return "El paciente con dni : " + this.getDni() + ", tiene un peso de: " + 
-               this.getPeso() + " Kg, y una altura de: " + this.getAltura() + " Mts" ;
+        return "El paciente con dni : " + this.getDni() + ": "; 
     }
 
     @Override
