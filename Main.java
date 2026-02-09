@@ -6,7 +6,7 @@ public class Main {
         Paciente  lucia = new Paciente("Lucia Moreira", 29, "femenino", 39279226);
         Paciente fernando = new Paciente("Fernando", 34, "masculino", 123456);
 
-        CalculadorIMC calc = new CalculadorIMC();
+        CalculadorSalud calc = new CalculadorSalud();
 
         lucia.addMedida(58.5, 1.58); // Primera vez
         lucia.addMedida(63.4, 1.58);
@@ -23,9 +23,14 @@ public class Main {
             System.out.println(p.getNombre());
             for (Medida m : p.getMedidas()) {
                 double imc = calc.calcularIMC(m.getPeso(), m.getAltura());
+                double tmb = calc.calcularTMB(p, m);
+                double hid = calc.calcularHidratacion(m);
                 System.out.println("Fecha: " + m.getFechaMedicion() + 
                                    " | Peso: " + m.getPeso() + 
-                                   " | IMC: " + String.format("%.2f", imc));
+                                   " | IMC: " + String.format("%.2f", imc) +
+                                   " | TMB: " + String.format("%.2f",tmb) +
+                                    "| HIDRAT: " + hid + " lts.");
+
             }
         }
     }

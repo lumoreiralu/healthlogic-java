@@ -32,4 +32,19 @@ public class CalculadorSalud implements Calculador{
         return tmb;
     }
 
+    @Override
+    public double calcularHidratacion(Medida m) {
+        double peso = m.getPeso();
+        double liquidoTotal = 0;
+
+        if(peso <= 10)
+            liquidoTotal = 100 * peso;
+        else if(peso <= 20)
+            liquidoTotal = 1000 + ((peso - 10) * 50);
+        else 
+            liquidoTotal = 1500 + ((peso - 20) * 20);
+
+        return liquidoTotal;
+    }
+
 }
