@@ -3,36 +3,43 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Paciente  lucia = new Paciente("Lucia Moreira", 29, "femenino", 39279226);
-        Paciente fernando = new Paciente("Fernando", 34, "masculino", 123456);
+        Calculador calc = new CalculadorSalud();
+        
 
-        CalculadorSalud calc = new CalculadorSalud();
+        Paciente p1 = new Paciente("Lucia", 29, "femenino", 39279226);
+        p1.addMedida(54.0, 1.58); 
+        Paciente p2 = new Paciente("Fernando", 34, "masculino", 1234);
+        p2.addMedida(80.2, 1.73);
 
-        lucia.addMedida(58.5, 1.58); // Primera vez
-        lucia.addMedida(63.4, 1.58);
-
-        fernando.addMedida(85.3, 1.70); //Primera vez
-        fernando.addMedida(80.2, 1.70);
-
-        System.out.println("--- Reporte de Salud de Pacientes ---");
         List<Paciente> pacientes = new ArrayList<>();
-        pacientes.add(fernando);
-        pacientes.add(lucia);
+        pacientes.add(p1);
+        pacientes.add(p2);
 
-        for (Paciente p : pacientes) {
-            System.out.println(p.getNombre());
-            for (Medida m : p.getMedidas()) {
-                double imc = calc.calcularIMC(m.getPeso(), m.getAltura());
-                double tmb = calc.calcularTMB(p, m);
-                double hid = calc.calcularHidratacion(m);
-                System.out.println("Fecha: " + m.getFechaMedicion() + 
-                                   " | Peso: " + m.getPeso() + 
-                                   " | IMC: " + String.format("%.2f", imc) +
-                                   " | TMB: " + String.format("%.2f",tmb) +
-                                    "| HIDRAT: " + hid + " lts.");
-
+        try {
+            for (Paciente  p : pacientes) {
+                Medida m = p.getUltimaMedida();
+                System.out.println("Procesando datos de: " + p.getNombre());
+                
+                double imc = calc.calcularIMC(m);
+                String categ = calc.obtenerCategoriaIMC(imc);
+                double tmb = calc.calcularTMB(p1, m);
+                double hidra = calc.calcularHidratacion(m);
+    
+                System.out.println("Resultados:");
+                System.out.println(" - IMC: " + String.format("%.2f", imc));
+                System.out.println(" - Categoria IMC: " + categ);
+                System.out.println(" - TMB: " + String.format("%.2f", tmb));
+                System.out.println(" - Hidratación sugerida: " + hidra + " ml"); 
             }
+
+
+        } catch (DatoClinicoInvalidoException e) {
+
+            System.out.println("Alerta de Seguridad Clínica: No se pudieron procesar los cálculos.");
+            System.out.println("Motivo: " + e.getMessage());
+        } catch (Exception e) {
+
+            System.out.println("Error inesperado en el sistema.");
         }
     }
-    
 }

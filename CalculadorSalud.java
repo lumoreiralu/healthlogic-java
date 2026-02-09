@@ -4,9 +4,15 @@ public class CalculadorSalud implements Calculador{
     }
 
     // metodo para calcular el IMC
-    public double calcularIMC(double peso, double altura) {
-        if (altura <= 0) {
-            throw new IllegalArgumentException("La altura debe ser mayor a cero");
+    public double calcularIMC(Medida m) throws DatoClinicoInvalidoException{
+        double altura = m.getAltura();
+        double peso = m.getPeso();
+
+        if (altura <= 0 || altura > 2.80) { 
+            throw new DatoClinicoInvalidoException("Altura fuera de rango: " + altura);
+        }
+        if (peso <= 0 || peso > 600) {
+            throw new DatoClinicoInvalidoException("Peso inválido para cálculo: " + peso);
         }
         return peso / (altura * altura);
     }
@@ -19,11 +25,14 @@ public class CalculadorSalud implements Calculador{
     }
 
     @Override
-    public double calcularTMB(Paciente p, Medida m) {
+    public double calcularTMB(Paciente p, Medida m) throws DatoClinicoInvalidoException {
             double tmb;
         // la altura debe estar en cm para esta fórmula
         double alturaCm = m.getAltura() * 100;
+        if(alturaCm>2800){
+            throw new DatoClinicoInvalidoException("Altura fuera de rango: " + alturaCm);
 
+        }
         if (p.getSexo().equalsIgnoreCase("Femenino")) {
             tmb = 655 + (9.6 * m.getPeso()) + (1.8 * alturaCm) - (4.7 * p.getEdad());
         } else {
@@ -33,8 +42,11 @@ public class CalculadorSalud implements Calculador{
     }
 
     @Override
-    public double calcularHidratacion(Medida m) {
+    public double calcularHidratacion(Medida m) throws DatoClinicoInvalidoException {
         double peso = m.getPeso();
+        if (peso <= 0 || peso > 600) {
+            throw new DatoClinicoInvalidoException("Peso inválido para cálculo: " + peso);
+        }
         double liquidoTotal = 0;
 
         if(peso <= 10)

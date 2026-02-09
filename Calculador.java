@@ -1,7 +1,7 @@
 public interface Calculador {
-    double calcularIMC(double peso, double altura);
-    String obtenerCategoriaIMC(double imc);
-    double calcularTMB(Paciente p, Medida m);
-    double calcularHidratacion(Medida m);
+    double calcularIMC(Medida m) throws DatoClinicoInvalidoException;
+    String obtenerCategoriaIMC(double imc) throws DatoClinicoInvalidoException;
+    double calcularTMB(Paciente p, Medida m) throws DatoClinicoInvalidoException;
+    double calcularHidratacion(Medida m) throws DatoClinicoInvalidoException;
 
 }
