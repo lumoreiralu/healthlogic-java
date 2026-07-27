@@ -66,5 +66,8 @@ public class Paciente {
         return dni;
     }
 
+    public Medida getUltimaMedida(){
+        return medidas.get(medidas.size()-1);
+    }
     
 }
