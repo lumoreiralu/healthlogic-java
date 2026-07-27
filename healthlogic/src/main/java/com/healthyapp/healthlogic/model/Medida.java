@@ -12,8 +12,8 @@ public class Medida {
     private Long id;
 
     private LocalDate fechaMedicion;
-    private double peso;
-    private double altura;
+    private Double peso;
+    private Double altura;
 
     @ManyToOne
     @JoinColumn(name = "dni_paciente")
@@ -21,25 +21,19 @@ public class Medida {
 
     public Medida() {}
 
-
-    
-    public Long getId() {
-        return id;
-    }
-
-
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-
-
-    public Medida(double peso, double altura, Paciente paciente) {
+    public Medida(Double peso, Double altura, Paciente paciente) {
         this.fechaMedicion = LocalDate.now();
         this.peso = peso;
         this.altura = altura;
         this.paciente = paciente;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) { // Agregado para el mapper
+        this.id = id;
     }
 
     public LocalDate getFechaMedicion() {
@@ -50,22 +44,27 @@ public class Medida {
         this.fechaMedicion = fechaMedicion;
     }
 
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
-    public double getAltura() {
+    public Double getAltura() {
         return altura;
     }
 
-    public void setAltura(double altura) {
+    public void setAltura(Double altura) {
         this.altura = altura;
     }
 
-   
-    
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) { // Agregado para el mapper y service
+        this.paciente = paciente;
+    }
 }

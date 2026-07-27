@@ -1,6 +1,5 @@
 package com.healthyapp.healthlogic.model;
 
-
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 public class Paciente {
 
     @Id
-    private int dni; // PK
+    private Long dni; // Cambiado a Long para coincidir con el DTO y el Mapper
 
     private String nombre;
     private int edad;
@@ -21,14 +20,20 @@ public class Paciente {
 
     public Paciente() {} // Constructor vacío obligatorio para JPA
 
-    public Paciente(int dni, String nombre, int edad, String sexo) {
+    public Paciente(Long dni, String nombre, int edad, String sexo) {
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
         this.sexo = sexo;
     }
 
-    
+    public Long getDni() {
+        return dni;
+    }
+
+    public void setDni(Long dni) { // Agregado para poder setear el DNI
+        this.dni = dni;
+    }
 
     public String getNombre() {
         return nombre;
@@ -62,12 +67,10 @@ public class Paciente {
         this.medidas = medidas;
     }
 
-    public int getDni() {
-        return dni;
+    public Medida getUltimaMedida() {
+        if (medidas == null || medidas.isEmpty()) {
+            return null;
+        }
+        return medidas.get(medidas.size() - 1);
     }
-
-    public Medida getUltimaMedida(){
-        return medidas.get(medidas.size()-1);
-    }
-    
 }

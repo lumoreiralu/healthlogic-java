@@ -9,5 +9,5 @@ import java.util.List;
 public interface MedidaRepository extends JpaRepository<Medida, Long> {
     
     // agregar consultas automáticas con solo nombrar el método:
-    List<Medida> findByPacienteDni(int dni);
+    List<Medida> findByPacienteDni(Long dni);
 }
