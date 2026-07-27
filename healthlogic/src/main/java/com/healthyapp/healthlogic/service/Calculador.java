@@ -1,3 +1,9 @@
+package com.healthyapp.healthlogic.service;
+import org.springframework.stereotype.Service;
+import com.healthyapp.healthlogic.exception.DatoClinicoInvalidoException;
+import com.healthyapp.healthlogic.model.Medida;
+import com.healthyapp.healthlogic.model.Paciente;
+@Service 
 public interface Calculador {
     double calcularIMC(Medida m) throws DatoClinicoInvalidoException;
     String obtenerCategoriaIMC(double imc) throws DatoClinicoInvalidoException;
