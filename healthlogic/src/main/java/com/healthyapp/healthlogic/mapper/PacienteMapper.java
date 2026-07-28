@@ -18,6 +18,27 @@ public class PacienteMapper {
         this.medidaMapper = medidaMapper;
     }
 
+    public Paciente toEntity(PacienteDTO dto) {
+        if (dto == null) return null;
+
+        Paciente paciente = new Paciente();
+        paciente.setDni(dto.getDni());
+        paciente.setNombre(dto.getNombre());
+        paciente.setEdad(dto.getEdad());
+        paciente.setSexo(dto.getSexo());
+
+        // Convertir la lista de MedidaDTO a Medida
+        if (dto.getMedidas() != null) {
+            List<MedidaDTO> medidasDTO = dto.getMedidas();
+            List<com.healthyapp.healthlogic.model.Medida> medidas = medidasDTO.stream()
+                    .map(medidaMapper::toEntity)
+                    .collect(Collectors.toList());
+            paciente.setMedidas(medidas);
+        }
+
+        return paciente;
+    }
+
     public PacienteDTO toDTO(Paciente paciente) {
         if (paciente == null) return null;
 

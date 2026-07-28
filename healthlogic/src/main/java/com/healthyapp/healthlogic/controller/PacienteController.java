@@ -2,6 +2,7 @@ package com.healthyapp.healthlogic.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.healthyapp.healthlogic.dto.PacienteDTO;
@@ -15,6 +16,12 @@ public class PacienteController {
 
     public PacienteController(PacienteService pacienteService) {
         this.pacienteService = pacienteService;
+    }
+
+    @PostMapping
+    public ResponseEntity<PacienteDTO> agregarPaciente(@RequestBody PacienteDTO pacienteDTO) {
+        PacienteDTO nuevoPaciente = pacienteService.agregarPaciente(pacienteDTO);
+        return new ResponseEntity<>(nuevoPaciente, HttpStatus.CREATED);
     }
 
     @GetMapping

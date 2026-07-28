@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.healthyapp.healthlogic.dto.PacienteDTO;
 import com.healthyapp.healthlogic.mapper.PacienteMapper;
+import com.healthyapp.healthlogic.model.Paciente;
 import com.healthyapp.healthlogic.repository.PacienteRepository;
 
 @Service
@@ -20,6 +21,12 @@ public class PacienteService {
         this.pacienteRepository = pacienteRepository;
         this.pacienteMapper = pacienteMapper;
         this.calculador = calculador;
+    }
+
+    public PacienteDTO agregarPaciente(PacienteDTO pacienteDTO){
+        Paciente paciente = pacienteMapper.toEntity(pacienteDTO);
+        Paciente pacienteGuardado = pacienteRepository.save(paciente);
+        return pacienteMapper.toDTO(pacienteGuardado);
     }
 
     public List<PacienteDTO> obtenerPacientes() {
