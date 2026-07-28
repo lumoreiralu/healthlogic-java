@@ -54,4 +54,15 @@ public class MedidaService {
         Medida medidaGuardada = medidaRepository.save(medida);
         return medidaMapper.toDTO(medidaGuardada);
     }
+
+    public void eliminarMedida(Long dni, Long id) {
+        Medida medida = medidaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medida no encontrada con ID: " + id));
+
+        if (!medida.getPaciente().getDni().equals(dni)) {
+            throw new RuntimeException("La medida no pertenece al paciente con DNI: " + dni);
+        }
+
+        medidaRepository.delete(medida);
+    }
 }

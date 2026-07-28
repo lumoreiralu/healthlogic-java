@@ -2,6 +2,7 @@ package com.healthyapp.healthlogic.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,4 +29,17 @@ public class PacienteController {
     public List<PacienteDTO> obtenerPacientes() {
         return pacienteService.obtenerPacientes();
     }
+
+    @DeleteMapping("/{dni}")
+    public ResponseEntity<Void> eliminarPaciente(@PathVariable Long dni) {
+        pacienteService.eliminarPaciente(dni);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PatchMapping("/{dni}")
+    public ResponseEntity<PacienteDTO> actualizarPaciente(@PathVariable Long dni, @RequestBody PacienteDTO pacienteDTO) {
+        PacienteDTO pacienteActualizado = pacienteService.actualizarPaciente(dni, pacienteDTO);
+        return ResponseEntity.ok(pacienteActualizado);
+    }
+
+   
 }

@@ -34,4 +34,22 @@ public class PacienteService {
                 .map(pacienteMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public void eliminarPaciente(Long dni) {
+        pacienteRepository.deleteById(dni);
+    }
+
+    public PacienteDTO actualizarPaciente(Long dni, PacienteDTO pacienteDTO) {
+        Paciente pacienteExistente = pacienteRepository.findById(dni)
+                .orElseThrow(() -> new RuntimeException("Paciente no encontrado con DNI: " + dni));
+
+        // Actualizar los campos del paciente existente
+        pacienteExistente.setNombre(pacienteDTO.getNombre());
+        pacienteExistente.setEdad(pacienteDTO.getEdad());
+        pacienteExistente.setSexo(pacienteDTO.getSexo());
+
+        // Guardar cambios y devolver el DTO actualizado
+        Paciente pacienteGuardado = pacienteRepository.save(pacienteExistente);
+        return pacienteMapper.toDTO(pacienteGuardado);
+    }
 }

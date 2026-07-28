@@ -10,4 +10,5 @@ public interface MedidaRepository extends JpaRepository<Medida, Long> {
     
     // agregar consultas automáticas con solo nombrar el método:
     List<Medida> findByPacienteDni(Long dni);
+    void deleteByIdAndPacienteDni(Long id, Long dni);
 }

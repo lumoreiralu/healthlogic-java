@@ -34,4 +34,12 @@ public class MedidaController {
         MedidaDTO nuevaMedida = medidaService.agregarMedida(dni, medidaDTO);
         return new ResponseEntity<>(nuevaMedida, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarMedida(@PathVariable Long dni, @PathVariable Long id) {
+        medidaService.eliminarMedida(dni, id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+    }
+
+    
 }
