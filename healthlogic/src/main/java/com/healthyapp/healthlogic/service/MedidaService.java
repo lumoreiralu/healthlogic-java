@@ -19,13 +19,16 @@ public class MedidaService {
     private final MedidaRepository medidaRepository;
     private final PacienteRepository pacienteRepository;
     private final MedidaMapper medidaMapper;
+    private final Calculador calculador;
 
     public MedidaService(MedidaRepository medidaRepository, 
                          PacienteRepository pacienteRepository, 
-                         MedidaMapper medidaMapper) {
+                         MedidaMapper medidaMapper,
+                         Calculador calculador) {
         this.medidaRepository = medidaRepository;
         this.pacienteRepository = pacienteRepository;
         this.medidaMapper = medidaMapper;
+        this.calculador = calculador;
     }
 
     // Obtener todas las medidas de un paciente por su DNI

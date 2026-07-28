@@ -14,10 +14,12 @@ public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
     private final PacienteMapper pacienteMapper;
+    private final Calculador calculador;
 
-    public PacienteService(PacienteRepository pacienteRepository, PacienteMapper pacienteMapper) {
+    public PacienteService(PacienteRepository pacienteRepository, PacienteMapper pacienteMapper, Calculador calculador) {
         this.pacienteRepository = pacienteRepository;
         this.pacienteMapper = pacienteMapper;
+        this.calculador = calculador;
     }
 
     public List<PacienteDTO> obtenerPacientes() {

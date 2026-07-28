@@ -8,7 +8,7 @@ public class CalculadorSalud implements Calculador{
 
     public CalculadorSalud() {
     }
-
+    @Override
     // metodo para calcular el IMC
     public double calcularIMC(Medida m) throws DatoClinicoInvalidoException{
         double altura = m.getAltura();
@@ -22,7 +22,7 @@ public class CalculadorSalud implements Calculador{
         }
         return peso / (altura * altura);
     }
-        
+    @Override
     public String obtenerCategoriaIMC(double imc) {
         if (imc < 18.5) return "Bajo peso";
         if (imc < 24.9) return "Peso normal (Eutrófico)";
@@ -35,7 +35,7 @@ public class CalculadorSalud implements Calculador{
             double tmb;
         // la altura debe estar en cm para esta fórmula
         double alturaCm = m.getAltura() * 100;
-        if(alturaCm>2800){
+        if(alturaCm>280){
             throw new DatoClinicoInvalidoException("Altura fuera de rango: " + alturaCm);
 
         }
@@ -53,16 +53,13 @@ public class CalculadorSalud implements Calculador{
         if (peso <= 0 || peso > 600) {
             throw new DatoClinicoInvalidoException("Peso inválido para cálculo: " + peso);
         }
-        double liquidoTotal = 0;
 
         if(peso <= 10)
-            liquidoTotal = 100 * peso;
+            return 100 * peso;
         else if(peso <= 20)
-            liquidoTotal = 1000 + ((peso - 10) * 50);
+            return 1000 + ((peso - 10) * 50);
         else 
-            liquidoTotal = 1500 + ((peso - 20) * 20);
-
-        return liquidoTotal;
+            return 1500 + ((peso - 20) * 20);
     }
 
 }
