@@ -53,18 +53,18 @@ Ejemplo de Body para crear Paciente (POST /api/pacientes):
   "dni": 12345678,
   "nombre": "Ana Pérez",
   "edad": 30,
-  "sexo": "Femenino"
+  "sexo": "F" / "M"
 }
 
 📏 Mediciones (/api/pacientes/{dni}/medidas)
 Método, Endpoint,                       Descripción
 GET,    /api/pacientes/{dni}/medidas,   Obtiene el historial de mediciones de un paciente.
 POST,   /api/pacientes/{dni}/medidas,   Agrega una nueva medición (peso/altura) a un paciente.
+DELETE, api/pacientes/{dni}/medidas/{id} Elimina una medida de un paciente.
 
 
 Ejemplo de Body para agregar Medición (POST /api/pacientes/12345678/medidas):
 {
-  "fechaMedicion": "2026-07-28",
   "peso": 68.5,
   "altura": 1.65
 }

@@ -41,5 +41,4 @@ public class MedidaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
     }
 
-    
 }

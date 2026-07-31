@@ -9,11 +9,12 @@ import java.util.List;
 public class Paciente {
 
     @Id
-    private Long dni; // Cambiado a Long para coincidir con el DTO y el Mapper
+    private Long dni; 
 
     private String nombre;
     private int edad;
     private String sexo;
+    
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Medida> medidas = new ArrayList<>();

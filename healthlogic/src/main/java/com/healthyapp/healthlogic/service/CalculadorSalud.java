@@ -20,7 +20,7 @@ public class CalculadorSalud implements Calculador{
         if (peso <= 0 || peso > 600) {
             throw new DatoClinicoInvalidoException("Peso inválido para cálculo: " + peso);
         }
-        return peso / (altura * altura);
+        return Math.round((peso / (altura * altura)) * 100.0) / 100.0;
     }
     @Override
     public String obtenerCategoriaIMC(double imc) {
@@ -39,12 +39,12 @@ public class CalculadorSalud implements Calculador{
             throw new DatoClinicoInvalidoException("Altura fuera de rango: " + alturaCm);
 
         }
-        if (p.getSexo().equalsIgnoreCase("Femenino")) {
+        if (p.getSexo().equalsIgnoreCase("F")) {
             tmb = 655 + (9.6 * m.getPeso()) + (1.8 * alturaCm) - (4.7 * p.getEdad());
         } else {
             tmb = 66 + (13.7 * m.getPeso()) + (5 * alturaCm) - (6.8 * p.getEdad());
         }
-        return tmb;
+        return Math.round(tmb * 100.0) / 100.0; // Redondear a 2 decimales
     }
 
     @Override
@@ -55,11 +55,11 @@ public class CalculadorSalud implements Calculador{
         }
 
         if(peso <= 10)
-            return 100 * peso;
+            return Math.round(100 * peso * 100.0) / 100.0;
         else if(peso <= 20)
-            return 1000 + ((peso - 10) * 50);
+            return Math.round((1000 + ((peso - 10) * 50)) * 100.0) / 100.0;
         else 
-            return 1500 + ((peso - 20) * 20);
+            return Math.round((1500 + ((peso - 20) * 20)) * 100.0) / 100.0;
     }
 
 }

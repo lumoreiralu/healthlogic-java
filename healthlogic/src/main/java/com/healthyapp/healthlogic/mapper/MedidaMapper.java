@@ -13,13 +13,19 @@ public class MedidaMapper {
 
         Long dniPaciente = (medida.getPaciente() != null) ? medida.getPaciente().getDni() : null;
 
-        return new MedidaDTO(
+        MedidaDTO dto = new MedidaDTO(
             medida.getId(),
             medida.getFechaMedicion(),
             medida.getPeso(),
             medida.getAltura(),
             dniPaciente
         );
+
+        dto.setTmb(medida.getTmb());
+        dto.setImc(medida.getImc());
+        dto.setHidratacion(medida.getHidratacion());
+
+        return dto;
     }
 
     public Medida toEntity(MedidaDTO dto) {
@@ -30,6 +36,9 @@ public class MedidaMapper {
         medida.setFechaMedicion(dto.getFechaMedicion());
         medida.setPeso(dto.getPeso());
         medida.setAltura(dto.getAltura());
+        medida.setTmb(dto.getTmb());
+        medida.setImc(dto.getImc());
+        medida.setHidratacion(dto.getHidratacion());
 
         return medida;
     }

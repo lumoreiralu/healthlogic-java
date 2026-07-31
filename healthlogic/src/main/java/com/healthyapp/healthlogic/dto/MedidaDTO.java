@@ -2,12 +2,24 @@ package com.healthyapp.healthlogic.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MedidaDTO {
     private Long id;
     private LocalDate fechaMedicion;
     private Double peso;
     private Double altura;
     private Long dniPaciente;
+
+    // Solo lectura: el cliente recibe los valores, pero no puede enviarlos
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Double tmb;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Double imc;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Double hidratacion;
 
     // Constructor vacío
     public MedidaDTO() {}
@@ -27,6 +39,32 @@ public class MedidaDTO {
         this.peso = peso;
         this.altura = altura;
         this.dniPaciente = dniPaciente;
+    }
+
+
+    
+    public Double getTmb() {
+        return tmb;
+    }
+
+    public void setTmb(Double tmb) {
+        this.tmb = tmb;
+    }
+
+    public Double getImc() {
+        return imc;
+    }
+
+    public void setImc(Double imc) {
+        this.imc = imc;
+    }
+
+    public Double getHidratacion() {
+        return hidratacion;
+    }
+
+    public void setHidratacion(Double hidratacion) {
+        this.hidratacion = hidratacion;
     }
 
     public Long getId() {

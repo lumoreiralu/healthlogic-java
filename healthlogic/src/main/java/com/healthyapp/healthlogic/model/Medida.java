@@ -14,7 +14,11 @@ public class Medida {
     private LocalDate fechaMedicion;
     private Double peso;
     private Double altura;
+    @Transient private Double tmb; // Agregado para almacenar el TMB calculado
+    @Transient private Double imc; // Agregado para almacenar el IMC calculado
+    @Transient private Double hidratacion; // Agregado para almacenar la hidratación calculada
 
+    
     @ManyToOne
     @JoinColumn(name = "dni_paciente")
     private Paciente paciente;
@@ -26,6 +30,30 @@ public class Medida {
         this.peso = peso;
         this.altura = altura;
         this.paciente = paciente;
+    }
+
+    public Double getImc() {
+        return imc;
+    }
+
+    public void setImc(Double imc) {
+        this.imc = imc;
+    }
+
+    public Double getHidratacion() {
+        return hidratacion;
+    }
+
+    public void setHidratacion(Double hidratacion) {
+        this.hidratacion = hidratacion;
+    }
+
+    public void setTmb(Double tmb) {
+        this.tmb = tmb;
+    }
+
+    public Double getTmb() {
+        return tmb;
     }
 
     public Long getId() {

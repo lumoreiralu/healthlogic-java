@@ -15,12 +15,11 @@ public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
     private final PacienteMapper pacienteMapper;
-    private final Calculador calculador;
 
-    public PacienteService(PacienteRepository pacienteRepository, PacienteMapper pacienteMapper, Calculador calculador) {
+
+    public PacienteService(PacienteRepository pacienteRepository, PacienteMapper pacienteMapper) {
         this.pacienteRepository = pacienteRepository;
         this.pacienteMapper = pacienteMapper;
-        this.calculador = calculador;
     }
 
     public PacienteDTO agregarPaciente(PacienteDTO pacienteDTO){
