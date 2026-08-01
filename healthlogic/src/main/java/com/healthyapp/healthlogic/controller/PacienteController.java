@@ -1,13 +1,14 @@
 package com.healthyapp.healthlogic.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.healthyapp.healthlogic.dto.PacienteDTO;
-
+import com.healthyapp.healthlogic.dto.PacienteSelectDTO;
 import com.healthyapp.healthlogic.service.PacienteService;
 @RestController
 @RequestMapping("/api/pacientes")
@@ -39,6 +40,16 @@ public class PacienteController {
     public ResponseEntity<PacienteDTO> actualizarPaciente(@PathVariable Long dni, @RequestBody PacienteDTO pacienteDTO) {
         PacienteDTO pacienteActualizado = pacienteService.actualizarPaciente(dni, pacienteDTO);
         return ResponseEntity.ok(pacienteActualizado);
+    }
+
+    @GetMapping("/select")
+    public ResponseEntity<List<PacienteSelectDTO>> obtenerPacientesParaSelect() {
+        List<PacienteSelectDTO> pacientes = pacienteService.obtenerTodosLosPacientes()
+            .stream()
+            .map(p -> new PacienteSelectDTO(p.getDni(), p.getNombre(), p.getApellido()))
+            .collect(Collectors.toList());
+            
+        return ResponseEntity.ok(pacientes);
     }
 
     

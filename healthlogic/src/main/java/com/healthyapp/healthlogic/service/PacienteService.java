@@ -51,4 +51,8 @@ public class PacienteService {
         Paciente pacienteGuardado = pacienteRepository.save(pacienteExistente);
         return pacienteMapper.toDTO(pacienteGuardado);
     }
+
+    public List<Paciente> obtenerTodosLosPacientes() {
+        return pacienteRepository.findAll();
+    }
 }
