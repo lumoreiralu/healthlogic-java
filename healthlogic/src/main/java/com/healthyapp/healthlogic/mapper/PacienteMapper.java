@@ -24,6 +24,7 @@ public class PacienteMapper {
         Paciente paciente = new Paciente();
         paciente.setDni(dto.getDni());
         paciente.setNombre(dto.getNombre());
+        paciente.setApellido(dto.getApellido());
         paciente.setEdad(dto.getEdad());
         paciente.setSexo(dto.getSexo());
 
@@ -52,6 +53,7 @@ public class PacienteMapper {
         return new PacienteDTO(
             paciente.getDni(),
             paciente.getNombre(),
+            paciente.getApellido(),
             paciente.getEdad(),
             paciente.getSexo(),
             medidasDTO

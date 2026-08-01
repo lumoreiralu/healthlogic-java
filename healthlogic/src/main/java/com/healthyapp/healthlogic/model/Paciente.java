@@ -12,6 +12,7 @@ public class Paciente {
     private Long dni; 
 
     private String nombre;
+    private String apellido;
     private int edad;
     private String sexo;
     
@@ -21,13 +22,16 @@ public class Paciente {
 
     public Paciente() {} // Constructor vacío obligatorio para JPA
 
-    public Paciente(Long dni, String nombre, int edad, String sexo) {
+    public Paciente(Long dni, String nombre, int edad, String sexo, String apellido) {
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
         this.sexo = sexo;
+        this.apellido = apellido;
     }
 
+
+    
     public Long getDni() {
         return dni;
     }
@@ -73,5 +77,13 @@ public class Paciente {
             return null;
         }
         return medidas.get(medidas.size() - 1);
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 }
